@@ -21,4 +21,8 @@ erl_crash.dump
 .sudo_as_admin_successful
 /.cache
 
+# Ignore secret files from Elixir Apps
 *.secret.exs
+
+# Ignore vagrant files
+/.vagrant
