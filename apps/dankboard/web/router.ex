@@ -19,6 +19,13 @@ defmodule Dankboard.Router do
     get "/", PageController, :index
   end
 
+  forward "/api", Absinthe.Plug,
+    schema: Dankboard.Schema
+
+  forward "/graphiql", Absinthe.Plug.GraphiQL,
+    schema: Dankboard.Schema
+
+
   # Other scopes may use custom stacks.
   # scope "/api", Dankboard do
   #   pipe_through :api
