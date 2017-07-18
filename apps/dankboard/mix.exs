@@ -23,7 +23,8 @@ defmodule Dankboard.Mixfile do
   def application do
     [mod: {Dankboard, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex]]
+                    :phoenix_ecto, :postgrex, :absinthe, :absinthe_plug, 
+                    :absinthe_ecto, :poison, :faker]]
   end
 
   # Specifies which paths to compile per environment.
@@ -41,7 +42,12 @@ defmodule Dankboard.Mixfile do
      {:phoenix_html, "~> 2.6"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.11"},
-     {:cowboy, "~> 1.0"}]
+     {:cowboy, "~> 1.0"},
+     {:absinthe, "~> 1.3.0"},
+     {:absinthe_plug, "~> 1.1"},
+     {:absinthe_ecto, git: "https://github.com/absinthe-graphql/absinthe_ecto"},
+     {:poison, "~> 2.1.0"},
+     {:faker, "~> 0.7"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
