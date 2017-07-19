@@ -3,7 +3,8 @@
 ## Setting up
 The project was made to be used in a Vagrant environment, to do so,
 install Vagrant (and VirtualBox, which is used by Vagrant) 
-[https://www.vagrantup.com/downloads.html]
+
+> [https://www.vagrantup.com/downloads.html]
 
 Then run
 
