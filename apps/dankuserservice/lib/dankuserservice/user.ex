@@ -16,5 +16,7 @@ defmodule Dankuserservice.User do
     def changeset(struct, params \\ :empty) do
         struct
         |> cast(params, @required_fields, @optional_fields)
+        |> unique_constraint(:username)
+        |> unique_constraint(:email)
     end
 end
