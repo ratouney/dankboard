@@ -21,10 +21,16 @@ defmodule Dankgate.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Dankgate, []},
-     applications: [:phoenix, :phoenix_pubsub, :cowboy, :logger, :gettext,
-                    :absinthe, :absinthe_plug,
-                    #:absinthe_ecto,
-                    :poison]]
+     applications: [ :phoenix,
+                    :phoenix_pubsub,
+                    :cowboy,
+                    :logger,
+                    :gettext,
+                    :absinthe,
+                    :absinthe_plug,
+                     :poison
+                   ]
+    ]
   end
 
   # Specifies which paths to compile per environment.
@@ -35,13 +41,13 @@ defmodule Dankgate.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:phoenix, "~> 1.2.4"},
-     {:phoenix_pubsub, "~> 1.0"},
-     {:gettext, "~> 0.11"},
-     {:cowboy, "~> 1.0"},
-     {:absinthe, "~> 1.3.0"},
-     {:absinthe_plug, "~> 1.1"},
-    #{:absinthe_ecto, git: "https://github.com/absinthe-graphql/absinthe_ecto.git"},
-     {:poison, "~> 2.1.0"}]
+    [ {:phoenix, "~> 1.2.4"},
+      {:phoenix_pubsub, "~> 1.0"},
+      {:gettext, "~> 0.11"},
+      {:cowboy, "~> 1.0"},
+      {:absinthe, "~> 1.3.0"},
+      {:absinthe_plug, "~> 1.1"},
+      {:poison, "~> 2.1.0"}
+    ]
   end
 end
