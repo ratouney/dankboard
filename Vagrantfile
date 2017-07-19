@@ -9,11 +9,11 @@ NUMBER_OF_CPUS = 2
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "ubuntu/xenial64"
 
-  config.vm.provision "shell", inline: <<-SHELL
-     passwd -d -u ubuntu
-     chage -d0 ubuntu
-  SHELL
-  
+  # config.vm.provision "shell", inline: <<-SHELL
+  #    passwd -d -u ubuntu
+  #    chage -d0 ubuntu
+  # SHELL
+
   config.vm.define "dank_box" do |dank_box|
     dank_box.vm.provider "virtualbox" do |v|
       v.name = VM_NAME
