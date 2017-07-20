@@ -10,11 +10,27 @@
              found ->
                  {:ok, found}
          end        
-     end
+    end
 
      def get(%{email: email}) do
-         
-     end
+        case Repo.get_by(User, email: email) do
+             nil ->
+                 {:error, "Email <#{email}> not found"}
+             found ->
+                 {:ok, found}
+         end
+    end
+
+    def get(%{username: username}) do
+         case Repo.get_by(User, username: username) do
+             nil ->
+                 {:error, "Username <#{username}> not found"}
+             found ->
+                 {:ok, found}
+         end        
+    end
+    
+    def get(_), do: {:error, "Invalid request"}
 
      def find(%{id: id}, :id) do
          case Repo.get_by(User, id: id) do
@@ -24,8 +40,6 @@
                  {:ok, found}
          end
      end
-     def find(_no_id, :id), do: {:error, "No valid id given"}
-
      def find(%{email: email}, :email) do
          case Repo.get_by(User, email: email) do
              nil ->
@@ -34,8 +48,6 @@
                  {:ok, found}
          end
      end
-     def find(_no_mail, :email), do: {:error, "No valid email given"}
-
      def find(%{username: username}, :username) do
          case Repo.get_by(User, username: username) do
              nil ->
@@ -44,8 +56,6 @@
                  {:ok, found}
          end
      end
-     def find(_no_user, :username), do: {:error, "No valid username given"}
-
      def find(_, _), do: {:error, "No valid tag given"}
 
      def create(params \\ %{}) do
