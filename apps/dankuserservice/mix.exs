@@ -19,7 +19,11 @@ defmodule DankUserService.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     # Specify extra applications you'll use from Erlang/Elixir
-    [extra_applications: [:logger, :ecto, :postgrex],
+    [extra_applications: [:logger, 
+                          :ecto, 
+                          :postgrex,
+                          :comeonin,
+                          :guardian],
      mod: {DankUserService.Application, []}]
   end
 
@@ -39,7 +43,9 @@ defmodule DankUserService.Mixfile do
   defp deps do
     [
       {:ecto, "~> 2.1"},
-      {:postgrex, ">= 0.0.0"}
+      {:postgrex, ">= 0.0.0"},
+      {:comeonin, "~> 2.5"},
+      {:guardian, "~> 0.13.0"}
     ]
   end
 end
