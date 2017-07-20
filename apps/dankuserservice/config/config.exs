@@ -28,6 +28,6 @@ use Mix.Config
 # here (which is why it is important to import them last).
 #
 config :dankuserservice, 
-    ecto_repos: [Dankuserservice.Repo]
+    ecto_repos: [DankUserService.Repo]
 
 import_config "#{Mix.env}.exs"

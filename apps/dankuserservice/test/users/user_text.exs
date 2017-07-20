@@ -1,5 +1,5 @@
-defmodule Dankuserservice.TestAddUser do
-    alias Dankuserservice.HandleUser
+defmodule DankUserService.TestAddUser do
+    alias DankUserService.HandleUser
     use ExUnit.Case
 
     test "Adding a user" do

@@ -1,4 +1,4 @@
-defmodule Dankuserservice.Mixfile do
+defmodule DankUserService.Mixfile do
   use Mix.Project
 
   def project do
@@ -20,7 +20,7 @@ defmodule Dankuserservice.Mixfile do
   def application do
     # Specify extra applications you'll use from Erlang/Elixir
     [extra_applications: [:logger, :ecto, :postgrex],
-     mod: {Dankuserservice.Application, []}]
+     mod: {DankUserService.Application, []}]
   end
 
   # Dependencies can be Hex packages:

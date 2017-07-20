@@ -1,4 +1,4 @@
-defmodule Dankuserservice.Repo.Migrations.AddUsername do
+defmodule DankUserService.Repo.Migrations.AddUsername do
   use Ecto.Migration
 
   def change do
@@ -9,5 +9,8 @@ defmodule Dankuserservice.Repo.Migrations.AddUsername do
 
       timestamps()
     end
+    
+    create unique_index :users, :username
+    create unique_index :users, :email
   end
 end

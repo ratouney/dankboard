@@ -1,6 +1,6 @@
-defmodule Dankuserservice do
+defmodule DankUserService do
   @moduledoc """
-  Documentation for Dankuserservice.
+  Documentation for DankUserService.
   """
 
   @doc """
@@ -8,7 +8,7 @@ defmodule Dankuserservice do
 
   ## Examples
 
-      iex> Dankuserservice.hello
+      iex> DankUserService.hello
       :world
 
   """
