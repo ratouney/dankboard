@@ -9,7 +9,7 @@ by adding `DankUserService` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
-  [{:DankUserService, "~> 0.1.0"}]
+  [{:dankuserservice, "~> 0.1.0"}]
 end
 ```
 

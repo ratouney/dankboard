@@ -1,3 +1,3 @@
 defmodule DankUserService.Repo do
-    use Ecto.Repo, otp_app: :DankUserService
+    use Ecto.Repo, otp_app: :dankuserservice
 end
