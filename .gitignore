@@ -26,3 +26,9 @@ erl_crash.dump
 
 # Ignore vagrant files
 /.vagrant
+
+# Ignore my stupid branch markers
+zzz__*
+
+# Ignore log files
+*.log
