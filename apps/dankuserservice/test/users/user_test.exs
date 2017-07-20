@@ -11,6 +11,7 @@ defmodule DankUserService.TestAddUser do
     @other_set_samepw %{username: "Chuck Norris", email: "freedom@murica.gov.us", password: "ilovecats"}
     @other_set %{username: "Chuck Norris", email: "freedom@murica.gov.us", password: "punchisis"}
     @valid_set_other_username %{username: "Jane Doe", email: "john.doe@google.com", password: "ilovecats"}
+    @valid_set_other_password %{username: "John Doe", email: "john.doe@google.com", password: "ihatedogs"}
     @valid_set_other_email %{username: "John Doe", email: "iloveloli@google.com", password: "ilovecats"}
     @password_too_short %{username: "John Doe", email: "iloveloli@google.com", password: "ilove"}
     @bonus_arg %{username: "John Doe", email: "john.doe@google.com", password: "ilovecats", yodelo: 123}
@@ -60,6 +61,7 @@ defmodule DankUserService.TestAddUser do
         assert %{valid?: false, errors: [email: {"has already been taken", []}]} = second
     end
 
+    # @tag :skip
     test "Added user with the same password" do
         first = DankUserService.User.Registration.create(@valid_set)
         second = DankUserService.User.Registration.create(@other_set_samepw)
@@ -75,8 +77,34 @@ defmodule DankUserService.TestAddUser do
                [count: 6, validation: :length, min: 6]}]} = user
     end
 
-    test "Updating an existing user" do
+    test "Updating an existing user with a new email" do
         user = DankUserService.User.Registration.create(@valid_set)
         newuser = DankUserService.User.Registration.update(@valid_set_other_email, user.id)
+
+        assert @valid_set.username == newuser.username
+        assert @valid_set.password == newuser.password
+        assert @valid_set_other_email.email == newuser.email
+        assert user.id == newuser.id
+    end
+
+    test "Updating an existing user with a new password" do
+        user = DankUserService.User.Registration.create(@valid_set)
+        newuser = DankUserService.User.Registration.update(@valid_set_other_password, user.id)
+
+        assert @valid_set.username == newuser.username
+        assert @valid_set.email == newuser.email
+        assert user.id == newuser.id
+        refute user.password_hash == newuser.password_hash
+    end
+
+    # @tag :skip
+    test "Deleting an existing user" do
+        user = DankUserService.User.Registration.create(@valid_set)
+
+        assert %User{} = DankUserService.User.Registration.delete(user)
+    end
+
+    test "Delete a non-existant user" do
+        DankUserService.User.Registration.delete(%{id: "1337"})
     end
 end
