@@ -1,4 +1,4 @@
-defmodule Dankuserservice.User do
+defmodule DankUserService.User do
     use Ecto.Schema
     import Ecto.Changeset
 
@@ -16,6 +16,7 @@ defmodule Dankuserservice.User do
     def changeset(struct, params \\ :empty) do
         struct
         |> cast(params, @required_fields, @optional_fields)
+        # These contraints don't work like this, i probably missed something
         |> unique_constraint(:username)
         |> unique_constraint(:email)
     end
