@@ -68,7 +68,7 @@
         end
      end
 
-     def delete(params \  %{}) do
+     def delete(params \\  %{}) do
          case find(params, :id) do
              {:error, msg} ->
                  IO.puts msg
