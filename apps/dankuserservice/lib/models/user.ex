@@ -6,18 +6,19 @@ defmodule DankUserService.Models.User do
     field :username,      :string, null: false
     field :email,         :string, null: false
     field :github_key,    :string
-    field :password,      :string, virtual: true
+    field :password,      :string, virtual: true, null: false
     field :password_hash, :string
 
     timestamps()
   end
 
-  @required_fields ~w{username email password}
-  @optional_fields ~w{github_key}
+  @all_fields ~w{username email password github_key}a
+  @required_fields ~w{username email password}a
 
   def changeset(struct, params \\ :empty) do
     struct
-    |> cast(params, @required_fields, @optional_fields)
+    |> cast(params, @all_fields)
+    |> validate_required(@required_fields)
     |> validate_length(:password, min: 6, max: 32)
     |> unique_constraint(:username)
     |> unique_constraint(:email)

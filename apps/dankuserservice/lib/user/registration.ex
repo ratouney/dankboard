@@ -6,10 +6,10 @@ defmodule DankUserService.User.Registration do
     changeset = User.changeset(%User{}, params)
 
     case Repo.insert(changeset) do
-      { :ok, user } ->
+      {:ok, user} ->
         user
-      { :error, %{errors: msg} } ->
-        msg
+      {:error, errlog} ->
+        errlog
     end
   end
 
@@ -24,7 +24,8 @@ defmodule DankUserService.User.Registration do
 
   def update(params \\ :empty, id) do
     changeset =
-      Repo.get!(User, id)
+      User
+      |> Repo.get!(id)
       |> User.changeset(params)
 
     case Repo.update(changeset) do

@@ -26,4 +26,8 @@ defmodule Dankgate do
     Dankgate.Endpoint.config_change(changed, removed)
     :ok
   end
+  
+  def hello do
+    :world
+  end
 end

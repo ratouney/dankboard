@@ -44,7 +44,8 @@ defmodule DankUserService.Mixfile do
     [
       {:ecto, "~> 2.1"},
       {:postgrex, ">= 0.0.0"},
-      {:comeonin, "~> 2.5"}
+      {:comeonin, "~> 2.5"},
+      {:credo, "~> 0.8", only: [:dev, :test], runtime: false}
     ]
   end
 end
