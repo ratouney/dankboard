@@ -1,5 +1,5 @@
 defmodule DankUserService.TestAddUser do
-    alias DankUserService.HandleUser
+    alias DankUserService.User.Fetcher
     use ExUnit.Case
 
     test "Adding a user" do
