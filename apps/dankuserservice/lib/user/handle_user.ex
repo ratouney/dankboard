@@ -59,22 +59,16 @@
      def find(_, _), do: {:error, "No valid tag given"}
 
      def create(params \\ %{}) do
-         case find(params, :username) do
-             {:error, _} ->
-                 case find(params, :email) do
-                     {:error, _} -> 
-                         %User{}
-                         |> User.changeset(params)
-                         |> Repo.insert!
-                     {:ok, _} ->
-                         {:error, "Email exists"}
-                 end
-             {:ok, _} ->
-                 {:error, "Username exists"}
-         end
+        changeset = User.changeset(%User{}, params)
+        case Repo.insert(changeset) do
+            {:ok, user_created} ->
+                user_created
+            {:error, %{errors: msg}} ->
+                msg
+        end
      end
 
-     def delete(params \\ %{}) do
+     def delete(params \  %{}) do
          case find(params, :id) do
              {:error, msg} ->
                  IO.puts msg
@@ -84,13 +78,22 @@
      end
 
      def update(params \\ %{}, id) do
+         # Check if the user exists in the database
          case Repo.get(User, id) do
              nil ->
                  {:error, "User <#{id}> not found"}
              found ->
-                 found
-                 |> User.changeset(params)
-                 |> Repo.update
+                # If the given user ID is found, run it
+                # Through the Changetset to see if it's valid
+                found = User.changeset(found, params)
+                # Depending on the update status, either return the errors
+                # or the updated user structure
+                case Repo.update(found) do
+                    {:ok, updated_user} ->
+                        updated_user
+                    {:error, %{errors: msg}} ->
+                        msg
+                end
          end
      end
  end
