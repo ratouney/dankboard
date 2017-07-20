@@ -4,7 +4,7 @@ use Mix.Config
 config :logger, level: :warn
 
 # Configure your database
-config :dankuserservice, Dankuserservice.Repo,
+config :DankUserService, DankUserService.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "postgres",

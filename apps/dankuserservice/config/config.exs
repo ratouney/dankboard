@@ -10,11 +10,11 @@ use Mix.Config
 
 # You can configure for your application as:
 #
-#     config :dankuserservice, key: :value
+#     config :DankUserService, key: :value
 #
 # And access this configuration in your application as:
 #
-#     Application.get_env(:dankuserservice, :key)
+#     Application.get_env(:DankUserService, :key)
 #
 # Or configure a 3rd-party app:
 #
@@ -27,7 +27,7 @@ use Mix.Config
 # Configuration from the imported file will override the ones defined
 # here (which is why it is important to import them last).
 #
-config :dankuserservice, 
-    ecto_repos: [Dankuserservice.Repo]
+config :DankUserService, 
+    ecto_repos: [DankUserService.Repo]
 
 import_config "#{Mix.env}.exs"

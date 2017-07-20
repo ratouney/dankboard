@@ -1,6 +1,6 @@
-defmodule DankuserserviceTest do
+defmodule DankUserServiceTest do
   use ExUnit.Case
-  doctest Dankuserservice
+  doctest DankUserService
 
   test "the truth" do
     assert 1 + 1 == 2

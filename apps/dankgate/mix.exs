@@ -47,7 +47,7 @@ defmodule Dankgate.Mixfile do
       {:cowboy, "~> 1.0"},
       {:absinthe, "~> 1.3.0"},
       {:absinthe_plug, "~> 1.1"},
-      {:poison, "~> 2.1.0"}
+      {:poison, ">= 2.1.0"}
     ]
   end
 end
