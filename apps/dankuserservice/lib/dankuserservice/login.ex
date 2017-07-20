@@ -10,6 +10,8 @@ defmodule DankUserService.Login do
           true -> 
             {:ok, "Welcome back " <> found.username <> " !"}
           _ ->
+            # Manual timer to avoid brute force
+            :timer.sleep(1000)
             {:error, "Invalid Password"}
         end
     end
