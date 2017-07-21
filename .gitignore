@@ -32,3 +32,6 @@ zzz__*
 
 # Ignore log files
 *.log
+
+# Ignore VSCode files
+/.vscode
