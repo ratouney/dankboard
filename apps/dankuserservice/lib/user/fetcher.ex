@@ -1,7 +1,7 @@
 defmodule DankUserService.User.Fetcher do
   alias DankUserService.Repo
-  alias DankUserService.User
-  import Ecto.Query
+  alias DankUserService.Models.User
+  # import Ecto.Query
 
   def get(%{id: id}) do
     case Repo.get_by(User, id: id) do

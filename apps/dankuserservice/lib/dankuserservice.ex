@@ -12,7 +12,4 @@ defmodule DankUserService do
       :world
 
   """
-  def hello do
-    :world
-  end
 end

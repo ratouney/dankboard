@@ -5,12 +5,7 @@ defmodule DankUserService.User.Registration do
   def create(params \\ :empty) do
     changeset = User.changeset(%User{}, params)
 
-    case Repo.insert(changeset) do
-      {:ok, user} ->
-        user
-      {:error, errlog} ->
-        errlog
-    end
+    Repo.insert(changeset)
   end
 
   def delete(%{id: _id} = params) do
@@ -23,16 +18,9 @@ defmodule DankUserService.User.Registration do
   end
 
   def update(params \\ :empty, id) do
-    changeset =
-      User
-      |> Repo.get!(id)
-      |> User.changeset(params)
-
-    case Repo.update(changeset) do
-      {:ok, user} ->
-        user
-      {:error, %{errors: msg}} ->
-        msg
-    end
+    User
+    |> Repo.get!(id)
+    |> User.changeset(params)
+    |> Repo.update()
   end
 end
