@@ -8,6 +8,6 @@ config :dankuserservice, DankUserService.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "postgres",
-  database: "dankuser_dev",
+  database: "dankuser_test_db",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
