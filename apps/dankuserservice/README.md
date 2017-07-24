@@ -29,7 +29,7 @@ you can use the different commands to access the data you want :
   %DankUserService.Models.User{...}
 ```
 
-Any case of error, would return a result in the form of {:error, **error info**}
+Any case of error, would return a result in the form of {:error, error_info}dfgdfgfdg
 
 ## Installation
 
