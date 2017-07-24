@@ -51,5 +51,3 @@ defmodule DankUserService.Server do
     end
   end
 end
-
-
