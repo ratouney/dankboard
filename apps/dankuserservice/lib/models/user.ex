@@ -6,7 +6,7 @@ defmodule DankUserService.Models.User do
     field :username,      :string, null: false
     field :email,         :string, null: false
     field :github_key,    :string
-    field :password,      :string, virtual: true, null: false
+    field :password,      :string, virtual: true # , null: false
     field :password_hash, :string
 
     timestamps()
