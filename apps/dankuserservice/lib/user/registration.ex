@@ -8,10 +8,6 @@ defmodule DankUserService.User.Registration do
     Repo.insert(changeset)
   end
 
-  def build(params \\ :empty) do
-    changeset = User.changeset(%User{}, params)
-  end
-
   def delete(%{id: _id} = params) do
     case DankUserService.User.Fetcher.get(params) do
       {:ok, found} ->
