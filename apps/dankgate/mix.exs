@@ -21,14 +21,15 @@ defmodule Dankgate.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Dankgate, []},
-     applications: [ :phoenix,
+     applications: [
+                    :phoenix,
                     :phoenix_pubsub,
                     :cowboy,
                     :logger,
                     :gettext,
                     :absinthe,
                     :absinthe_plug,
-                     :poison
+                    :poison
                    ]
     ]
   end
@@ -41,7 +42,8 @@ defmodule Dankgate.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [ {:phoenix, ">= 1.2.4"},
+    [
+      {:phoenix, ">= 1.2.4"},
       {:phoenix_pubsub, "~> 1.0"},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
