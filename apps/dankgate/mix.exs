@@ -21,14 +21,14 @@ defmodule Dankgate.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Dankgate, []},
-     applications: [:phoenix,
-                    :phoenix_pubsub,
-                    :cowboy,
-                    :logger,
-                    :gettext,
-                    :absinthe,
-                    :absinthe_plug,
-                    :poison
+     applications: [ :phoenix,
+                     :phoenix_pubsub,
+                     :cowboy,
+                     :logger,
+                     :gettext,
+                     :absinthe,
+                     :absinthe_plug,
+                     :poison
                    ]
     ]
   end
