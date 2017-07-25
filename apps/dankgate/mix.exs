@@ -22,12 +22,12 @@ defmodule Dankgate.Mixfile do
   def application do
     [mod: {Dankgate, []},
      applications: [ :phoenix,
-                    :phoenix_pubsub,
-                    :cowboy,
-                    :logger,
-                    :gettext,
-                    :absinthe,
-                    :absinthe_plug,
+                     :phoenix_pubsub,
+                     :cowboy,
+                     :logger,
+                     :gettext,
+                     :absinthe,
+                     :absinthe_plug,
                      :poison
                    ]
     ]

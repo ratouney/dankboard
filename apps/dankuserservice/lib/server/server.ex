@@ -9,7 +9,7 @@ defmodule DankUserService.Server do
     case DankUserService.User.Registration.create(params) do
       {:ok, user} ->
         {:reply, user, [user | userlist]}
-      {:error, %{valid?: false, errors: msg}} ->
+      {:error, msg} ->
         {:reply, {:error, msg}, userlist}
       _ ->
         {:reply, :fatal_error, userlist}
@@ -19,7 +19,7 @@ defmodule DankUserService.Server do
   def handle_call({:update, id, params}, _from, userlist) do
     case DankUserService.User.Fetcher.get(%{id: id}) do
       {:error, msg} ->
-        {:reply, msg, userlist}
+        {:reply, {:error, msg}, userlist}
       {:ok, user} ->
         rt = DankUserService.User.Registration.update(params, user.id)
         {:reply, rt, userlist}
@@ -28,7 +28,7 @@ defmodule DankUserService.Server do
     end
   end
 
-  def handle_call({:get, :all}, _from, userlist) do
+  def handle_call({:get, :all}, _from, _state) do
     users = DankUserService.Repo.all(DankUserService.Models.User)
 
     {:reply, users, users}
