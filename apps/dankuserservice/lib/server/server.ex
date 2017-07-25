@@ -2,7 +2,7 @@ defmodule DankUserService.Server do
   use GenServer
 
   def start_link do
-    GenServer.start_link(__MODULE__, [])
+    GenServer.start_link(__MODULE__, [], name: __MODULE__)
   end
 
   def handle_call({:create, params}, _from, userlist) do
@@ -28,6 +28,12 @@ defmodule DankUserService.Server do
     end
   end
 
+  def handle_call({:get, :all}, _from, userlist) do
+    users = DankUserService.Repo.all(DankUserService.Models.User)
+
+    {:reply, users, users}
+  end
+  
   def handle_call({:get, key, val}, _from, userlist) do
     case DankUserService.User.Fetcher.get(Map.put(%{}, key, val)) do
       {:ok, user} ->
