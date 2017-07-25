@@ -25,11 +25,11 @@ you can use the different commands to access the data you want :
   iex(5)> DankUserService.Client.Get.id(pid, id)
   %DankUserService.Models.User{...}
 
-  iex(5)> DankUserService.Client.dete(pid, id)
+  iex(5)> DankUserService.Client.delete(pid, id)
   %DankUserService.Models.User{...}
 ```
 
-Any case of error, would return a result in the form of {:error, error_info}dfgdfgfdg
+Any case of error, would return a result in the form of {:error, error_info}
 
 ## Installation
 
