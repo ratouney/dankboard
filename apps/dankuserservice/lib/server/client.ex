@@ -6,8 +6,12 @@ defmodule DankUserService.Client do
   This module handles changes made to the User database.
   To recieve data from it, use DankUserService.Client.Get
 
-  The default PID is linked to the server module name, you can use it like thi :
-      iex(1)> DankUserService.Client.delete(DankUserService.Server, 1)
+  First, run the corresponding server :
+      iex(1)> {:ok, pid} = DankUserService.Server.start_link()
+  
+  Now use the PID in whichever function you need.
+  You can also use the server module name as a PID, like this :
+      iex(2)> DankUserService.Client.delete(DankUserService.Server, 1)
   (this will delete the user with the ID = 1)
 
   """ 
@@ -77,18 +81,69 @@ defmodule DankUserService.Client do
 end
 
 defmodule DankUserService.Client.Get do
+  @moduledoc """
+    This module is an extension of the DankUserService.Client module which specialises in retrieving data
+
+    All functions in this module only retrieve data from the server, if you wish to modifiy it, please use the DankUserService.Client module.
+    The interact with the server, you must first run it : 
+
+        iex(1)> DankUserService.Server.start_link()
+  """
+
+  @doc """
+    This function retrieves all Users from the given server
+
+    It returns a list of ```%DankUserService.Models.User{}``` structures
+
+        iex(1)> DankUserService.Client.Get.all(DankUserService.Server)
+        [
+          %DankUserService.Models.User{...},
+          %DankUserService.Models.User{...},
+          %DankUserService.Models.User{...},
+        ]
+  """
   def all(pid) do
     GenServer.call(pid, {:get, :all})
   end
 
+  @doc """
+    This function searches for the given ID in the given server.
+
+        iex(1)> DankUserService.Client.Get.id(DankUserService.Server, 1)
+
+    If found, it return a tuple :
+        {:ok, %DankUserService.Models.User{...}}
+    Else it returns an error message in the form of a string :
+        {:error, ...cause...}
+  """
   def id(pid, val) do
     GenServer.call(pid, {:get, :id, val})
   end
 
+  @doc """
+    This functions searches for the given username.
+
+        iex(1)> DankUserService.Client.Get.username(DankUserService.Server, "ratouney")
+
+    If found, it return :
+        {:ok, %DankUserService.Models.User{...}}
+    Else it returns and error with a message :
+        {:error, ...cause...}
+  """
   def username(pid, val) do
     GenServer.call(pid, {:get, :username, val})
   end
 
+  @doc """
+    This functions searches for the given email.
+
+        iex(1)> DankUserService.Client.Get.email(DankUserService.Server, "john.doe@gmail.com")
+
+    If found, it return :
+        {:ok, %DankUserService.Models.User{...}}
+    Else it returns and error with a message :
+        {:error, ...cause...}
+  """
   def email(pid, val) do
     GenServer.call(pid, {:get, :email, val})
   end

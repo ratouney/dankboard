@@ -1,5 +1,10 @@
 defmodule DankUserService.Server do
   use GenServer
+  @moduledoc """
+    This is the Server part of the DankUserService
+
+    Messages coming from the DankUserService.Client
+  """
 
   def start_link do
     GenServer.start_link(__MODULE__, [], name: __MODULE__)
