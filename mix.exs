@@ -5,7 +5,15 @@ defmodule Dankumbrella.Mixfile do
     [apps_path: "apps",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     deps: deps()]
+     deps: deps(),
+
+     # Documentation for ExDocs
+     name: "Dankboard",
+     source_url: "https://github.com/ratouney/dankboard",
+     docs: [main: "Dankboard",
+            extras: ["README.md"]
+           ]
+    ]
   end
 
   # Dependencies can be Hex packages:
@@ -22,7 +30,8 @@ defmodule Dankumbrella.Mixfile do
   # and cannot be accessed from applications inside the apps folder
   defp deps do
     [
-      {:faker, ">= 0.0.0"}
+      {:faker, ">= 0.0.0"},
+      {:ex_doc, "~> 0.14", only: :dev, runtime: false}
   ]
   end
 end

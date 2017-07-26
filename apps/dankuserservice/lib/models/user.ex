@@ -25,6 +25,15 @@ defmodule DankUserService.Models.User do
     |> hash_password()
   end
 
+  def update_changeset(struct, params \\ :empty) do
+    struct
+    |> cast(params, @all_fields)
+    |> validate_length(:password, min: 6, max: 32)
+    |> unique_constraint(:username)
+    |> unique_constraint(:email)
+    |> hash_password()
+  end
+
   defp hash_password(changeset) do
     case changeset do
       %Ecto.Changeset{valid?: true, changes: %{password: pass}} ->

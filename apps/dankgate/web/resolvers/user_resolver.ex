@@ -6,36 +6,15 @@ defmodule Dankgate.UserResolver do
   end
 
   def find(%{id: id}, _info) do
-    case DankUserService.Client.Get.id(@server_name, id) do
-      {:error, msg} ->
-        {:error, msg}
-      :fatal_error ->
-        raise "Kill the student"
-      user ->
-        {:ok, user}
-    end
+    DankUserService.Client.Get.id(@server_name, id)
   end
 
   def find(%{username: username}, _info) do
-    case DankUserService.Client.Get.username(@server_name, username) do
-      {:error, msg} ->
-        {:error, msg}
-      :fatal_error ->
-        raise "Kill the student"
-      user ->
-        {:ok, user}
-    end
+    DankUserService.Client.Get.username(@server_name, username)
   end
 
   def find(%{email: email}, _info) do
-    case DankUserService.Client.Get.email(@server_name, email) do
-      {:error, msg} ->
-        {:error, msg}
-      :fatal_error ->
-        raise "Kill the student"
-      user ->
-        {:ok, user}
-    end
+    DankUserService.Client.Get.id(@server_name, email)
   end
 
   def create(args, _info) do
@@ -43,33 +22,27 @@ defmodule Dankgate.UserResolver do
       {:error, msg} ->
         %{valid?: false, errors: extract} = msg
         {:error, Dankgate.Error.ectoerrs_to_string(extract)}
-      :fatal_error ->
-        raise "Kill the student"
-      user ->
-        {:ok, user}
+      valid_resp ->
+        valid_resp
     end
   end
 
   def update(%{id: id, user: params}, _info) do
     case DankUserService.Client.update(@server_name, id, params) do
-      {:error, msg} ->
-        %{valid?: false, errors: extract} = msg
-        {:error, Dankgate.Error.ectoerrs_to_string(extract)}
-      :fatal_error ->
-          raise "Kill the student"
-      user ->
-        user
+      {:error, %{valid?: false, errors: err}} ->
+        {:error, Dankgate.Error.ectoerrs_to_string(err)}
+      valid_resp ->
+        IO.inspect valid_resp
+        valid_resp
     end
   end
 
   def delete(%{id: id}, _info) do
     case DankUserService.Client.delete(@server_name, id) do
+      {:ok, user} ->
+        user
       {:error, msg} ->
         {:error, msg}
-      :fatal_error ->
-        raise "Kill the student"
-      user ->
-        user
     end
   end
 end
