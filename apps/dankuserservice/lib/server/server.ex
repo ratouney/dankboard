@@ -3,13 +3,40 @@ defmodule DankUserService.Server do
   @moduledoc """
     This is the Server part of the DankUserService
 
-    Messages coming from the DankUserService.Client
+    Messages coming from the DankUserService.Client are treated by the handlers and converted into the according Database query handlers
   """
 
+  @doc """
+    This function starts the Server
+
+    It returns a tuple with the status and it's data, so either :
+    ```elixir
+    {:ok, <PID:1337>}
+    ```
+    Or in case of error : 
+    ```elixir
+    {:error, err_msg}
+    ```
+  """
   def start_link do
     GenServer.start_link(__MODULE__, [], name: __MODULE__)
   end
 
+  @doc """
+    This function returns values depending on the according request
+
+    The valid requests are :
+
+    ```{:create, params}``` -> `DankUserService.Client.create/2`
+
+    ```{:update, id, params}``` -> `DankUserService.Client.update/3`
+
+    ```{:get, :all}``` -> `DankUserService.Client.Get.all/1`
+
+    ```{:get, key, val}``` -> `DankUserService.Client.Get`
+
+    ```{:delete, id}``` -> `DankUserService.Client.delete/2`
+  """
   def handle_call({:create, params}, _from, userlist) do
     case DankUserService.User.Registration.create(params) do
       {:ok, user} ->
