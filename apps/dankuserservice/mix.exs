@@ -9,6 +9,7 @@ defmodule DankUserService.Mixfile do
      deps_path: "../../deps",
      lockfile: "../../mix.lock",
      elixir: "~> 1.4",
+     package: package,
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      deps: deps()]
@@ -46,7 +47,26 @@ defmodule DankUserService.Mixfile do
       {:postgrex, ">= 0.0.0"},
       {:comeonin, "~> 2.5"},
       {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
-      {:faker, ">= 0.0.0"}
+      {:faker, ">= 0.0.0"},
+      {:ex_doc, ">= 0.0.0", only: :dev}
+    ]
+  end
+
+  defp description do
+    """
+    The Dankest User Service there is, boi. If you want siek features, then you'll get ANOTHER one.
+    """
+  end
+
+  defp package do
+    # These are the default files included in the package
+    [
+      name: :dankuserservice,
+      files: ["lib", "priv", "mix.exs", "README*"],
+      description: "Yolo",
+      maintainers: ["Jean Pignouf", "God"],
+      licenses: ["Apache 4.20"],
+      links: %{"GitHub" => "https://github.com/ratouney/dankboard"}
     ]
   end
 end

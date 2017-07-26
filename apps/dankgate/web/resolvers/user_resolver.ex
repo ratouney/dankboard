@@ -18,23 +18,15 @@ defmodule Dankgate.UserResolver do
   end
 
   def create(args, _info) do
-    case DankUserService.Client.create(@server_name, args) do
-      {:error, msg} ->
-        %{valid?: false, errors: extract} = msg
-        {:error, Dankgate.Error.ectoerrs_to_string(extract)}
-      valid_resp ->
-        valid_resp
-    end
+    @server_name
+    |> DankUserService.Client.create(args)
+    |> handle_answer()
   end
 
   def update(%{id: id, user: params}, _info) do
-    case DankUserService.Client.update(@server_name, id, params) do
-      {:error, %{valid?: false, errors: err}} ->
-        {:error, Dankgate.Error.ectoerrs_to_string(err)}
-      valid_resp ->
-        IO.inspect valid_resp
-        valid_resp
-    end
+    @server_name
+    |> DankUserService.Client.update(id, params)
+    |> handle_answer()
   end
 
   def delete(%{id: id}, _info) do
@@ -43,6 +35,15 @@ defmodule Dankgate.UserResolver do
         user
       {:error, msg} ->
         {:error, msg}
+    end
+  end
+
+  defp handle_answer(answer) do
+    case answer do
+      {:error, %{valid?: false, errors: err}} ->
+        {:error, Dankgate.Error.ectoerrs_to_string(err)}
+      valid_resp ->
+        valid_resp
     end
   end
 end

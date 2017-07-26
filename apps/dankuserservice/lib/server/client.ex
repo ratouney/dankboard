@@ -20,16 +20,18 @@ defmodule DankUserService.Client do
     Send a request to the database to create a user with the given params
 
     Param is a map that will contain all the new users informations.
-        iex(1)> params = %{username: "John Doe", email: "john.doe@elixir.ex", password: "notpassword"}
-        %{username: "John Doe", email: "john.doe@elixir.ex", password: "notpassword"}
-        iex(2)> DankUserService.Client.create(params)
+    ```elixir
+    iex(1)> params = %{username: "John Doe", email: "john.doe@elixir.ex", password: "notpassword"}
+    %{username: "John Doe", email: "john.doe@elixir.ex", password: "notpassword"}
+    iex(2)> DankUserService.Client.create(params)
+    ```
 
-    After being validated by DankUserService.Models.User.changeset/2.
+    After being validated by `DankUserService.Models.User.changeset/2`.
 
     If successfull, it will return a tuple in the form of : 
         {:ok, %DankUserService.Models.User{...}}
     Else it will return an error as a string :
-        {:error, ...cause...}
+        {:error, errors}
   """
   def create(pid, params) do
     GenServer.call(pid, {:create, params})
@@ -48,14 +50,14 @@ defmodule DankUserService.Client do
 
         iex(1)> DankUserService.Client.Get.id(DankUserService.Server, 1)
         {:ok, %DankUserService.Models.User{username: "John Doe", ...}}
-        iex(2)> DankUserService.Client.updat(DankUserService.Server, 1, %{username: "Not John Doe"})
+        iex(2)> DankUserService.Client.update(DankUserService.Server, 1, %{username: "Not John Doe"})
         {:ok, %DankUserService.Models.User{username: "Not John Doe", ...}}
 
     The values given will be check for any errors and invalidated by DankUserService.Models.User.changeset/2 if needed.
     In case of success, it will return a tuple in the form of : 
         {:ok, %DankUserService.Models.User{...}}
     In case of error, a message will be provided as a string:
-        {:error, ...cause...}
+        {:error, errors}
   """
   def update(pid, id, params) do
     GenServer.call(pid, {:update, id, params})
@@ -73,7 +75,7 @@ defmodule DankUserService.Client do
     In case of success, it return a tuple with information about the deleted user : 
         {:ok, %DankUserService.Models.User{username: "John Doe", ...}}
     Else, it will return an error message which is a string:
-        {:error, ...cause...}
+        {:error, errors}
   """
   def delete(pid, id) do
     GenServer.call(pid, {:delete, id})
@@ -114,7 +116,7 @@ defmodule DankUserService.Client.Get do
     If found, it return a tuple :
         {:ok, %DankUserService.Models.User{...}}
     Else it returns an error message in the form of a string :
-        {:error, ...cause...}
+        {:error, errors}
   """
   def id(pid, val) do
     GenServer.call(pid, {:get, :id, val})
@@ -128,7 +130,7 @@ defmodule DankUserService.Client.Get do
     If found, it return :
         {:ok, %DankUserService.Models.User{...}}
     Else it returns and error with a message :
-        {:error, ...cause...}
+        {:error, errors}
   """
   def username(pid, val) do
     GenServer.call(pid, {:get, :username, val})
@@ -142,7 +144,7 @@ defmodule DankUserService.Client.Get do
     If found, it return :
         {:ok, %DankUserService.Models.User{...}}
     Else it returns and error with a message :
-        {:error, ...cause...}
+        {:error, errors}
   """
   def email(pid, val) do
     GenServer.call(pid, {:get, :email, val})
