@@ -1,16 +1,15 @@
 # DankUserService
 
-To use the DankUserService, you will need no use the DankUserService.Client module. 
-First, run the application in a IEx console with ```iex -S mix```. 
-Then run the local server to be able to communicate with the module.
-
+DankUserService is a User database that can be controlled through the given client (DankUserService.Client) 
+First, start an IEx console with ```iex -S mix```. 
+Then run the applications server :
 ```elixir
-  iex(1)> {:ok, pid} = DankUserService.Client.start_server
+  iex(1)> {:ok, pid} = DankUserService.Server.start_link()
   {:ok, #PID<123.123>}
 ```
 
-This syntax allows you to keep the ServerPID stored in a variable. Once this is done,
-you can use the different commands to access the data you want : 
+You can connected to the server using the module's name as a PID ```DankUserService.Server``` (they are linked) but this syntax allows you to keep the ServerPID stored in a variable.
+Once this is done, you can use the different commands to access the data you want : 
 
 ```elixir
   iex(2)> params = %{username: "John Doe", email: "john.doe@google.com", password: "peacebird"}
