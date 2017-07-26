@@ -13,14 +13,14 @@ defmodule DankUserService.User.Registration do
       {:ok, found} ->
         Repo.delete(found)
       {:error, msg} ->
-        raise msg
+        {:error, msg}
     end
   end
 
   def update(params \\ :empty, id) do
     User
     |> Repo.get!(id)
-    |> User.changeset(params)
+    |> User.update_changeset(params)
     |> Repo.update()
   end
 end

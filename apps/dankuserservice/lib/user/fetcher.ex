@@ -1,7 +1,6 @@
 defmodule DankUserService.User.Fetcher do
   alias DankUserService.Repo
   alias DankUserService.Models.User
-  # import Ecto.Query
 
   def get(%{id: id}) do
     case Repo.get_by(User, id: id) do
@@ -30,6 +29,8 @@ defmodule DankUserService.User.Fetcher do
     end
   end
 
+  def get(_), do: {:error, "No valid key given in the request"}
+
   def find(%{id: id}, :id) do
     case Repo.get_by(User, id: id) do
       nil ->
@@ -56,4 +57,6 @@ defmodule DankUserService.User.Fetcher do
         {:ok, found}
     end
   end
+
+  def find(_), do: {:error, "No valid key given in the request"}
 end
