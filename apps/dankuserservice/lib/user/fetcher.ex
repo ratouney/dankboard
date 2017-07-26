@@ -1,8 +1,28 @@
 defmodule DankUserService.User.Fetcher do
+  @moduledoc """
+    This module is responsible for fetching data from the database, which will be later processed and sent back to the client.
+
+    All of these functions are being called by the `DankUserService.Server` handlers, but can be used in an IEx console.
+  """
   alias DankUserService.Repo
   alias DankUserService.Models.User
 
-  def get(%{id: id}) do
+  @doc """
+    This function searches for a specific value of a key given by a map
+
+    To search the user with the username "ratouney", you'd go for :
+    ```elixir
+    iex(1)> DankUserService.User.Fetcher.get(%{username: "ratouney"})
+    {:status, _data}
+    ```
+
+    If a match is found, you would recieve :
+        {:ok, %DankUserService.Models.User{}}
+
+    If not, you would get :
+        {:error, err_msg}
+  """
+  def get(%{id: id} = map) do
     case Repo.get_by(User, id: id) do
       nil ->
         {:error, "User <#{id}> not found"}
@@ -31,6 +51,24 @@ defmodule DankUserService.User.Fetcher do
 
   def get(_), do: {:error, "No valid key given in the request"}
 
+  @doc """
+    This function searches for a value from a map.
+
+    You give in a certain map and a key, and it will search for that key's value in the database.
+
+    For example, this would be the same request as the example in `DankUserService.User.Fetcher.get/1` :
+    ```elixir
+    iex(1)> user = %{username: "ratouney", email: "dingdong@google.com", password: "notpassword"}
+    %{username: "ratouney", email: "dingdong@google.com", password: "notpassword"}
+    iex(2)> DankUserService.User.Fetcher.find(user, :username)
+    ```
+
+    If a match is found, you would recieve :
+        {:ok, %DankUserService.Models.User{}}
+
+    If not, you would get :
+        {:error, err_msg}
+  """
   def find(%{id: id}, :id) do
     case Repo.get_by(User, id: id) do
       nil ->
@@ -58,5 +96,5 @@ defmodule DankUserService.User.Fetcher do
     end
   end
 
-  def find(_), do: {:error, "No valid key given in the request"}
+  def find(_, _), do: {:error, "No valid key given in the request"}
 end
