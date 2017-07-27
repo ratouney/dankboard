@@ -7,6 +7,14 @@ defmodule DankCalendar.Tesla.Client do
 
   @calendar_url "https://vacations.fancyerp.com/admin/vacations/calendar.ical"
 
+  @doc """
+    This function send a query to retrive the Ical file
+
+    It first calls the `DankCalendar.Tesla.Conf` agent to recieve the generated client
+    Then it used `Tesla.get` to make the request at the url set in @calendar_url
+
+    An argument (`:body`) can be given to retrieve only the body (the ical file itself) without the HTTP request info, by default, the complete query will be returned.
+  """
   def get_calendar(part \\ :full) do
     client = 
     case DankCalendar.Tesla.Conf.run() do
@@ -29,6 +37,11 @@ defmodule DankCalendar.Tesla.Client do
     end
   end
 
+  @doc """
+    This function prints a log of absences from an `ExIcal` parsed Ical file
+
+    It can be given a second argument which would be the user to search for
+  """
   def get_only_abscences(icl, user) do
     icl
     |> Enum.filter(fn %{summary: x} ->
@@ -45,6 +58,9 @@ defmodule DankCalendar.Tesla.Client do
     |> print_log
   end
 
+  @doc """
+    This function parses the ExIcal structure and output a string with the User and the timespan he's absent from
+  """
   defp print_log(list) do
     Enum.each(list, fn x -> 
       %{summary: summary, start: erl_start_date, end: erl_end_date} = x
