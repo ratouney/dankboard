@@ -19,11 +19,13 @@ defmodule DankUserService.Client do
   @doc """
     Send a request to the database to create a user with the given params
 
+    PID is the servers PID or you can give the DankUserService.Server modulename which is linked to the PID.
     Param is a map that will contain all the new users informations.
+
     ```elixir
     iex(1)> params = %{username: "John Doe", email: "john.doe@elixir.ex", password: "notpassword"}
     %{username: "John Doe", email: "john.doe@elixir.ex", password: "notpassword"}
-    iex(2)> DankUserService.Client.create(params)
+    iex(2)> DankUserService.Client.create(DankUserService.Server, params)
     ```
 
     After being validated by `DankUserService.Models.User.changeset/2`.
@@ -46,7 +48,7 @@ defmodule DankUserService.Client do
     Params is a map with the informations you wish to update, 
     everything not mentioned will be left untouched.
 
-    You call the function by using the servers PID, the users's ID and the values to be updated : 
+    You call the function by using the servers PID or the servers modulename `DankUserService.Server`, the users's ID and the values to be updated : 
 
         iex(1)> DankUserService.Client.Get.id(DankUserService.Server, 1)
         {:ok, %DankUserService.Models.User{username: "John Doe", ...}}
