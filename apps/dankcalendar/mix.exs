@@ -19,6 +19,7 @@ defmodule Dankcalendar.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     # Specify extra applications you'll use from Erlang/Elixir
+    [applications: [:bunt]]
     [extra_applications: [:logger]]
   end
 
@@ -39,7 +40,8 @@ defmodule Dankcalendar.Mixfile do
     [
       {:tesla, "~> 0.7.1"},
       {:poison, ">= 1.0.0"},
-      {:ex_ical, "~> 0.1.0"}
+      {:ex_ical, "~> 0.1.0"},
+      {:bunt, ">= 0.1.0"},
     ]
   end
 end

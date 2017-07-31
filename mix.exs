@@ -31,7 +31,7 @@ defmodule Dankumbrella.Mixfile do
   defp deps do
     [
       {:faker, ">= 0.0.0"},
-      {:ex_doc, "~> 0.14", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.14", only: :dev, runtime: false},
   ]
   end
 end
